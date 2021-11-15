@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+    </tr>
+    <tr th:each="mapItem:${notes}">
+        <td th:utext="${mapItem.key}"></td>
+        <td th:utext="${mapItem.value.name}"></td>
+    </tr>
+</table>
+<form action="/app/add" method="post">
+    <input type="text" name="name" placeholder="Введите имя">
+    <input type="submit" value="Добавить">
+</form>
+<form action="/app/delete" method="post">
+    <input type="text" name="id" placeholder="Введите ID">
+    <input type="submit" value="Удалить">
+</form>
+<form action="/app/edit" method="post">
+    <input type="text" name="id" placeholder="Введите ID">
+    <input type="text" name="name" placeholder="Введите имя">
+    <input type="submit" value="Изменить">
+</form>
+</body>
+</html>
