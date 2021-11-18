@@ -22,6 +22,7 @@ class SpringBootRestTest {
     val person = """{"name" : "John"}"""
 
     @Test
+    @WithMockUser(username = "api", password = "api", roles = ["API"])
     fun getListOfRecords() {
         mockMvc.perform(
             MockMvcRequestBuilders.get(url("api/list"))
@@ -30,6 +31,7 @@ class SpringBootRestTest {
     }
 
     @Test
+    @WithMockUser(username = "api", password = "api", roles = ["API"])
     fun getRecord() {
         mockMvc.perform(
             MockMvcRequestBuilders.get(url("api/0/view"))
@@ -38,6 +40,7 @@ class SpringBootRestTest {
     }
 
     @Test
+    @WithMockUser(username = "api", password = "api", roles = ["API"])
     fun editRecord() {
         mockMvc.perform(
             MockMvcRequestBuilders.post("/api/0/edit")
@@ -48,6 +51,7 @@ class SpringBootRestTest {
     }
 
     @Test
+    @WithMockUser(username = "api", password = "api", roles = ["API"])
     fun addRecord() {
         mockMvc.perform(
             MockMvcRequestBuilders.post("/api/add")
@@ -58,6 +62,7 @@ class SpringBootRestTest {
     }
 
     @Test
+    @WithMockUser(username = "api", password = "api", roles = ["API"])
     fun deleteRecord() {
         mockMvc.perform(
             MockMvcRequestBuilders.post("/api/0/delete")

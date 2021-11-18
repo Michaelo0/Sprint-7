@@ -20,41 +20,41 @@ class SpringbootmvcApplicationTests {
     lateinit var mockMvc: MockMvc
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun addNote() {
         mockMvc.perform(
             MockMvcRequestBuilders.post("/app/add")
                 .param("name", "John")
-                .cookie(Cookie("auth", Instant.now().toEpochMilli().toString()))
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun deleteNote() {
         mockMvc.perform(
             MockMvcRequestBuilders.post("/app/0/delete")
-                .cookie(Cookie("auth", Instant.now().toEpochMilli().toString()))
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("redirect:/app/list")))
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun editNote() {
         mockMvc.perform(
             MockMvcRequestBuilders.post("/app/0/edit")
                 .param("name", "John")
-                .cookie(Cookie("auth", Instant.now().toEpochMilli().toString()))
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("redirect:/app/list")))
     }
 
     @Test
+    @WithMockUser(username = "admin", password = "admin", roles = ["ADMIN"])
     fun listAll() {
         mockMvc.perform(
             MockMvcRequestBuilders.get("/app/list")
-                .cookie(Cookie("auth", Instant.now().toEpochMilli().toString()))
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("app-page")))
